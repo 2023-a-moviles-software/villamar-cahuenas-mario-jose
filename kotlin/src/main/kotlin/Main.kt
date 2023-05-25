@@ -100,6 +100,10 @@ fun main(args: Array<String>) {
             dos: Int?
         ): this(uno, if(dos == null) 0 else dos)
         }
+        public fun sumar(): Int{
+            val total: Int = this.numeroUno + this.numeroDos;
+            return total;
+        }
     }
 
 
