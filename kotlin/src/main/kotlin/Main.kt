@@ -104,7 +104,18 @@ fun main(args: Array<String>) {
             val total: Int = this.numeroUno + this.numeroDos;
             return total;
         }
+        companion object{
+            val pi = 3.14
+            fun elevarAlCuadrado(numero: Int): Int{
+                return numero * numero;
+            }
+        val historialSumas = ArrayLsit<Int>();
+        fun agregarHistorial(numero: Int){
+            historialSumas.add(numero);
+        }
     }
+
+
 
 
     //
