@@ -80,8 +80,28 @@ fun main(args: Array<String>) {
             numeroDos = dos;//
             println("Inicializando");
         }
+
     }
-    suma(1,2);
+    class Suma(
+        unoParametro: Int,
+        dosParametro: Int,
+    ): NumerosJava(uno, dos){
+        init {
+            this.numeroUno
+            this.numeroDos
+        }
+        constructor(
+            uno: Int?,
+            dos: Int
+        ): this(if(uno == null) 0 else uno, dos)
+
+        constructor(
+            uno: Int,
+            dos: Int?
+        ): this(uno, if(dos == null) 0 else dos)
+        }
+    }
+
 
     //
 }
