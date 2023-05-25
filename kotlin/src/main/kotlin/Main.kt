@@ -81,6 +81,7 @@ fun main(args: Array<String>) {
             println("Inicializando");
         }
     }
+    suma(1,2);
 
     //
 }
