@@ -1,6 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MovilesSoftware2023A</string>
     <string name="bienvenida">
-        Bienvenida
+        Bienvenida land
+
+        
     </string>
 </resources>
