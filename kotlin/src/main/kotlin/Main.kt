@@ -127,10 +127,6 @@ fun main(args: Array<String>) {
             return@reduce acumulado + valorActual;// -> Logica de reduccion
         }
     println(respuestaReduce);
-
-
-
-
 }
 
 fun imprimirNombre(nombre: String): Unit {
