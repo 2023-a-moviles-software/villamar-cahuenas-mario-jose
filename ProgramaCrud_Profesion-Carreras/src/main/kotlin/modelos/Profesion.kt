@@ -1,14 +1,22 @@
 package modelos
 
+import KLocalDateSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import java.io.File
 import java.time.LocalDate
 
+
+@Serializable
 data class Profesion(
     val id: Int,
     val nombre: String,
     val descripcion: String,
     val activa: Boolean,
     val salarioPromedio: Double,
-    val fechaCreacion: LocalDate,
+    @Serializable(with = KLocalDateSerializer::class) val fechaCreacion: LocalDate,
     val carreras: MutableList<Carrera> = mutableListOf()
 ){
     val nombresCarreras: List<String>
@@ -16,6 +24,23 @@ data class Profesion(
 }
 object ModeloProfesion {
     private val profesiones: MutableList<Profesion> = mutableListOf()
+    private val json = Json { prettyPrint = true }
+    private val file = File("profesiones.json")
+
+    fun cargarDatos() {
+        if (file.exists()) {
+            val jsonString = file.readText()
+            profesiones.clear()
+            profesiones.addAll(json.decodeFromString(jsonString))
+        }else {
+            file.createNewFile()
+        }
+    }
+
+    fun guardarDatos() {
+        val jsonString = json.encodeToString(profesiones)
+        file.writeText(jsonString)
+    }
 
     fun obtenerTodos(): List<Profesion> {
         return profesiones.toList()

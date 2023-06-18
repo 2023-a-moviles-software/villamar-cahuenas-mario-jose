@@ -53,6 +53,8 @@ class ProfesionesVista {
                     menuPrincipal.iniciar()
                 }
                 7 -> {
+                    ModeloCarrera.guardarDatos() // Guardar los datos antes de salir de la aplicación
+                    ModeloProfesion.guardarDatos()
                     println("¡Hasta pronto!")
                     System.exit(0)
                 }

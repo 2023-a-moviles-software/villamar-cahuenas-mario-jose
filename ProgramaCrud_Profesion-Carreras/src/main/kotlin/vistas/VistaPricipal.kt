@@ -1,5 +1,8 @@
 package vistas
 
+import modelos.ModeloCarrera
+import modelos.ModeloProfesion
+
 
 class VistaPrincipal {
     private val tablas = TablaPorConsola()
@@ -7,8 +10,11 @@ class VistaPrincipal {
     private val vistaCarrera = CarrerasVista()
 
     fun iniciar() {
+        ModeloCarrera.cargarDatos() // Cargar los datos al inicio de la aplicación
+        ModeloProfesion.cargarDatos()
         mostrarEncabezado()
         seleccionarMenuEntidades()
+
     }
 
     fun mostrarEncabezado() {
@@ -30,7 +36,9 @@ class VistaPrincipal {
                 1 -> vistaProfesion.mostrarMenuPrincipal(this);
                 2 -> vistaCarrera.mostrarMenuPrincipal(this);
                 3 -> {
-                    println("¡Hasta pronto!")
+                    ModeloCarrera.guardarDatos() // Guardar los datos antes de salir de la aplicación
+                    ModeloProfesion.guardarDatos()
+                    println("¡Vuelva pronto!")
                     mostrarNuevamente = false
                 }
                 else -> {

@@ -1,0 +1,10 @@
+[
+    {
+        "id": 1,
+        "nombre": "dasd",
+        "descripcion": "das",
+        "activa": true,
+        "salarioPromedio": 2100.0,
+        "fechaCreacion": "1992-12-21"
+    }
+]

@@ -1,4 +1,11 @@
 package modelos
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import java.io.File
+
+@Serializable
 data class Carrera(
     val id: Int,
     val nombre: String,
@@ -10,6 +17,23 @@ data class Carrera(
 
 object ModeloCarrera {
     private val carreras: MutableList<Carrera> = mutableListOf()
+    private val json = Json { prettyPrint = true }
+    private val file = File("carreras.json")
+
+    //finciones para cargar los datos desde los archivos
+    fun cargarDatos() {
+        if (file.exists()) {
+            val jsonString = file.readText()
+            carreras.clear()
+            carreras.addAll(json.decodeFromString(jsonString))
+        } else {
+            file.createNewFile()
+        }
+    }
+    fun guardarDatos() {
+        val jsonString = json.encodeToString(carreras)
+        file.writeText(jsonString)
+    }
 
     fun obtenerTodos(): List<Carrera> {
         return carreras.toList()
