@@ -13,6 +13,7 @@ data class Carrera(
     val activa: Boolean,
     val duracion: Int,
     var profesionId: Int
+
 )
 
 object ModeloCarrera {
