@@ -46,6 +46,8 @@ class CarrerasVista {
                     mostrarCarreras()
                 }
                 5-> {
+                    ModeloCarrera.guardarDatos() // Guardar los datos antes de regresar
+                    ModeloProfesion.guardarDatos()
                     println("Volviendo al Menú Principal...")
                     menuPrincipal.iniciar()
                 }
@@ -142,7 +144,7 @@ class CarrerasVista {
         print("Ingrese la duración de la carrera (en años): ")
         val duracion = readLine()?.toIntOrNull()
 
-        val profesionId = 0
+        val profesionId = -1
         val id = generarIdCarrera()
 
         if (nombre != null && descripcion != null && activa != null && duracion != null) {

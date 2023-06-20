@@ -49,6 +49,8 @@ class ProfesionesVista {
                     agregarCarreraAProfesion()
                 }
                 6-> {
+                    ModeloCarrera.guardarDatos() // Guardar los datos antes de regresar
+                    ModeloProfesion.guardarDatos()
                     println("Volviendo al Menú Principal...")
                     menuPrincipal.iniciar()
                 }
@@ -250,7 +252,11 @@ class ProfesionesVista {
 
                         if (carreraId != null) {
                             val carrera = ModeloCarrera.obtenerPorId(carreraId)
-                            if (carrera != null) {
+                            if (carrera != null ) {
+                                if (carrera.profesionId != -1) {
+                                    println("La carrera ya está asignada a una profesión.")
+                                    return
+                                }
                                 carrera.profesionId = profesionId
                                 ModeloProfesion.agregarCarrera(profesionId, carrera)
                                 println("Carrera agregada exitosamente a la profesión.")
