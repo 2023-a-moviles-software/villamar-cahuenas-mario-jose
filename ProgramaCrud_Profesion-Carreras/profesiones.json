@@ -1,0 +1,46 @@
+[
+    {
+        "id": 1,
+        "nombre": "Ingenieria",
+        "descripcion": "Ciencias exactas y multidicplinarias",
+        "activa": true,
+        "salarioPromedio": 4000.0,
+        "fechaCreacion": "1992-03-02",
+        "carreras": [
+            {
+                "id": 1,
+                "nombre": "Ingeniera en software",
+                "descripcion": "cinecias de la computacion",
+                "activa": true,
+                "duracion": 5,
+                "profesionId": 1
+            },
+            {
+                "id": 2,
+                "nombre": "Ingenieria en computacion",
+                "descripcion": "Cinecias de la computacion",
+                "activa": true,
+                "duracion": 5,
+                "profesionId": 1
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "nombre": "Medicina",
+        "descripcion": "Ciencias medicas ",
+        "activa": true,
+        "salarioPromedio": 7000.0,
+        "fechaCreacion": "1992-03-12",
+        "carreras": [
+            {
+                "id": 3,
+                "nombre": "Mediicina General",
+                "descripcion": "Ciencias de la salud y medicina",
+                "activa": false,
+                "duracion": 7,
+                "profesionId": 2
+            }
+        ]
+    }
+]
