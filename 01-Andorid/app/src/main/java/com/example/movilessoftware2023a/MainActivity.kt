@@ -1,11 +1,26 @@
 package com.example.movilessoftware2023a
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.activity.result.contract.ActivityResultContracts
 
 class MainActivity : AppCompatActivity() {
+
+    val callbackContenidoIntentExplicito =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){
+            result ->
+            if(result.resultCode === Activity.RESULT_OK){
+                if(result.data != null){
+                    val data = result.data
+                    "${data?.getStringArrayExtra("nombreModificado")}"
+                }
+            }
+        }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,5 +42,19 @@ class MainActivity : AppCompatActivity() {
     ){
         val intent = Intent(this,clase)
         startActivity(intent)
+    }
+
+    fun abrirActividadConParametros(
+        clase: Class<*>
+    ){
+        val intentoExplicito = Intent(this, clase)
+        //Enviar parametros
+        // (aceptamos primitivas)
+        intentoExplicito.putExtra("nombre", "Mario")
+        intentoExplicito.putExtra("apellido","Villamar")
+        intentoExplicito.putExtra("edad",25)
+        //enviamos intent con Respeusta
+        // recibimos respuesta
+        callbackContenidoIntentExplicito.launch(intentoExplicito)
     }
 }
