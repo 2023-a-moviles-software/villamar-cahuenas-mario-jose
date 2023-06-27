@@ -14,7 +14,7 @@
         android:theme="@style/Theme.MovilesSoftware2023A"
         tools:targetApi="31">
         <activity
-            android:name=".ClienteExplicitoParametros"
+            android:name=".CIntentExplicitoParametros"
             android:exported="false" />
         <activity
             android:name=".BListView"
