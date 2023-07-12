@@ -21,6 +21,7 @@ class ESqLiteHelperEntrenador(
                 descripcion VARCHAR(50)
                 )
             """.trimIndent()
+        db?.execSQL(scriptSQLCrearTablaEntrenador)
 
     }
 
