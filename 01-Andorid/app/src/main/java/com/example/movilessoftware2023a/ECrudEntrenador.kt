@@ -2,6 +2,7 @@ package com.example.movilessoftware2023a
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 
@@ -10,49 +11,52 @@ class ECrudEntrenador : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ecrud_entrenador)
 
-        val botonBuscarBDD = findViewById<Button>(R.id.btn_buscar_bdd)
-        botonBuscarBDD
-            .setOnClickListener{
-                val id =  findViewById<EditText>(R.id.input_id)
-                val nombre = findViewById<EditText>(R.id.input_nombre)
-                val descripcion = findViewById<EditText>(R.id.input_descripcion)
-                val entrenador = EBaseDeDatos.tablaEntrenador!!
-                    .consultarEntrenadorporId(id.text.toString().toInt()
-                    )
-                id.setText(entrenador.id.toString())
-                nombre.setText(entrenador.nombre)
-                descripcion.setText(entrenador.descripcion)
-            }
-        val botonCrearBDD = findViewById<Button>(R.id.btn_crear_bdd)
-        botonCrearBDD
-            .setOnClickListener {
-                val nombre = findViewById<EditText>(R.id.input_nombre)
-                val descripcion = findViewById<EditText>(R.id.input_descripcion)
-                EBaseDeDatos.tablaEntrenador!!.crearEntrenador(
-                    nombre.text.toString(),
-                    descripcion.text.toString()
-                )
-            }
+        val botonBaseDatos = findViewById<Button>(R.id.btn_buscar_bdd)
 
-        val botonActualziarBDD = findViewById<Button>(R.id.btn_actualizar_bdd)
-        botonActualziarBDD
-            .setOnClickListener {
-                val id =  findViewById<EditText>(R.id.input_id)
-                val nombre = findViewById<EditText>(R.id.input_nombre)
-                val descripcion = findViewById<EditText>(R.id.input_descripcion)
-                EBaseDeDatos.tablaEntrenador!!.actualizarEntrenadorFormuIario(
-                    nombre.text.toString(),
-                    descripcion.text.toString(),
-                    id.text.toString().toInt()
-                )
-            }
+        botonBaseDatos.setOnClickListener {
+            val id = findViewById<EditText>(R.id.input_id)
+            val nombre = findViewById<EditText>(R.id.input_nombre)
+            val descripcion = findViewById<EditText>(R.id.input_descripcion)
+
+            val entrenador =
+                EBaseDeDatos.tablaEntrenador!!.consultarEntrenadorporId(id.text.toString().toInt())
+            id.setText(entrenador.id.toString())
+            nombre.setText(entrenador.nombre)
+            descripcion.setText(entrenador.descripcion)
+        }
+
+        val botonCrearBDD = findViewById<Button>(R.id.btn_crear_bdd)
+        botonCrearBDD.setOnClickListener {
+            val nombre = findViewById<EditText>(R.id.input_nombre)
+            val descripcion = findViewById<EditText>(R.id.input_descripcion)
+
+            val res = EBaseDeDatos.tablaEntrenador!!.crearEntrenador(
+                nombre.text.toString(),
+                descripcion.text.toString())
+            Log.i("Creación", res.toString())
+        }
+
+
+
+
+        val botonActualizarBDD = findViewById<Button>(R.id.btn_actualizar_bdd)
+        botonActualizarBDD.setOnClickListener {
+
+            val nombre = findViewById<EditText>(R.id.input_nombre)
+            val id = findViewById<EditText>(R.id.input_id)
+            val descripcion = findViewById<EditText>(R.id.input_descripcion)
+
+            EBaseDeDatos.tablaEntrenador!!.actualizarEntrenadorFormuIario(
+                nombre.text.toString(),
+                descripcion.text.toString(),
+                id.text.toString().toInt()
+            )
+        }
+
         val botonEliminarBDD = findViewById<Button>(R.id.btn_eliminar_bdd)
-        botonEliminarBDD
-            .setOnClickListener {
-                val id = findViewById<EditText>(R.id.input_id)
-                EBaseDeDatos.tablaEntrenador!!.eliminarEntrenadorFormulario(
-                    id.text.toString().toInt()
-                )
-            }
+        botonEliminarBDD.setOnClickListener {
+            val id = findViewById<EditText>(R.id.input_id)
+            EBaseDeDatos.tablaEntrenador!!.eliminarEntrenadorFormulario(id.text.toString().toInt())
+        }
     }
 }

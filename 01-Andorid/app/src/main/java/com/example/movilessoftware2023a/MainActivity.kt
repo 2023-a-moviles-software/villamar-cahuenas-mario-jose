@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             irActividad(AACicloVida::class.java)
         }
 
-        val botonListView = findViewById<Button>(R.id.btn_ir_view)
+        val botonListView = findViewById<Button>(R.id.btn_ir_list_view)
 
         botonListView.setOnClickListener{
             irActividad(BListView::class.java)
