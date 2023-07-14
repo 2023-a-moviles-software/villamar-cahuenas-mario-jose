@@ -51,7 +51,7 @@ class VistaCarreras : AppCompatActivity() {
             }
         }
 
-        
+
         val listView = findViewById<ListView>(R.id.lv_carreras)
         adaptador = ArrayAdapter(
             this,
