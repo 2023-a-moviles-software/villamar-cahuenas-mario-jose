@@ -68,6 +68,7 @@ class EditarProfesion : AppCompatActivity() {
         profesion.activa = activa
 
         mensaje.mostrarMensaje("Profesión actualizada")
-        actividad.cambiarActivity(MainActivity::class.java)
+//        actividad.cambiarActivity(MainActivity::class.java)
+        finish()
     }
 }
