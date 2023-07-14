@@ -4,75 +4,118 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AnadirProfesion">
-
-
-    <EditText
-        android:id="@+id/et_salario_promedio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:ems="10"
-        android:hint="salario($)"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/cb_activa"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    tools:context=".AnadirProfesion">>
 
     <TextView
-        android:id="@+id/txt_creacion_profesion"
+        android:id="@+id/txt_anadir_profesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Creacion de Profesion"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="Profesion"
+        android:textColor="#673AB7"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.047" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_anadir_profesion">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre:"
+            android:textColor="#7646CB"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="60dp"
+            tools:layout_editor_absoluteY="275dp" />
+
+        <EditText
+            android:id="@+id/et_nombre_profesion"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:hint="Nombre"
+            android:inputType="text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Descripcion:"
+            android:textColor="#7646CB"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="60dp"
+            tools:layout_editor_absoluteY="275dp" />
+
+        <EditText
+            android:id="@+id/et_descripcion_profesion"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:hint="Descripcion"
+            android:inputType="text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Salario:"
+            android:textColor="#7646CB"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="60dp"
+            tools:layout_editor_absoluteY="275dp" />
+
+        <EditText
+            android:id="@+id/et_salario_promedio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="salario(dolares)"
+            android:inputType="number"
+            android:textSize="18dp"
+            tools:layout_editor_absoluteX="87dp"
+            tools:layout_editor_absoluteY="228dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Activa:"
+            android:textColor="#7646CB"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="60dp"
+            tools:layout_editor_absoluteY="275dp" />
+
+        <CheckBox
+            android:id="@+id/cb_activa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Esta Activa"
+            tools:layout_editor_absoluteX="57dp"
+            tools:layout_editor_absoluteY="400dp" />
+
+    </TableLayout>
+
 
     <Button
         android:id="@+id/btn_guardar_profesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:backgroundTint="#673AB7"
         android:text="Guardar"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cb_activa"
-        app:layout_constraintVertical_bias="0.24" />
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
-    <CheckBox
-        android:id="@+id/cb_activa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Esta activa"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="376dp" />
-
-    <EditText
-        android:id="@+id/et_nombre_profesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
-        android:ems="10"
-        android:hint="Nombre"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/et_descripcion_profesion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/et_descripcion_profesion"
-        android:layout_width="212dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="56dp"
-        android:ems="10"
-        android:hint="Descripcion"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/et_salario_promedio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

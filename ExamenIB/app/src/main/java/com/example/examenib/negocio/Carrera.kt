@@ -8,4 +8,8 @@ data class Carrera(
     var duracion: Int,
     var profesionId: Int
 
-)
+){
+    override fun toString(): String {
+        return nombre
+    }
+}

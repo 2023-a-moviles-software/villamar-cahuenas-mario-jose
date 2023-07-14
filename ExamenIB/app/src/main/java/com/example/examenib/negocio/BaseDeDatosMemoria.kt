@@ -145,14 +145,13 @@ class BaseDeDatosMemoria {
         }
 
         // metodos para carreras
-        fun obtenerCarreraPorId(id: Int): Carrera? {
-            return arregloProfesion
-                .flatMap {
-                    it.carreras
-                }
-                .firstOrNull {
-                    it.id == id
-                }
+        fun obtenerCarreraPorId(idCarrera: Int,idProfesion: Int): Carrera? {
+            //obtener la profesion
+            val profesion = obtenerProfesionPorId(idProfesion)
+            //obtener la carrera de la profesion
+            return profesion?.carreras?.firstOrNull {
+                it.id == idCarrera
+            }
         }
 
         fun crearCarrera(
@@ -217,10 +216,10 @@ class BaseDeDatosMemoria {
             )
             return true
         }
-        fun eliminarCarreraPorId(id: Int): Boolean {
-            val carrera = obtenerCarreraPorId(id)
+        fun eliminarCarreraPorId(idC: Int,idP:Int): Boolean {
+            val carrera = obtenerCarreraPorId(idC,idP)
             if (carrera != null) {
-                val profesion = obtenerProfesionPorId(carrera.profesionId)
+                val profesion = obtenerProfesionPorId(idP)
                 profesion?.carreras?.remove(carrera)
                 return true
             }

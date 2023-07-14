@@ -18,7 +18,7 @@ class AnadirProfesion : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_anadir_profesion)
-        mensaje = Toaster(findViewById(R.id.txt_creacion_profesion))
+        mensaje = Toaster(findViewById(R.id.txt_anadir_profesion))
         val botonGuardar = findViewById<Button>(R.id.btn_guardar_profesion)
         botonGuardar.setOnClickListener{
             guardarProfesion()
@@ -27,13 +27,13 @@ class AnadirProfesion : AppCompatActivity() {
     fun guardarProfesion(){
         val nombre = findViewById<EditText>(R.id.et_nombre_profesion).text.toString()
         val descripcion = findViewById<EditText>(R.id.et_descripcion_profesion).text.toString()
-        val salario = findViewById<EditText>(R.id.et_salario_promedio).text.toString().toDouble()
+        val salario = findViewById<EditText>(R.id.et_salario_promedio).text.toString()
         val activa = findViewById<CheckBox>(R.id.cb_activa).isChecked
 
         if(
             nombre.isEmpty() ||
             descripcion.isEmpty() ||
-            salario == null
+            salario.isEmpty()
         ){
             mensaje.mostrarMensaje("Debe llenar todos los campos")
             return
@@ -44,10 +44,10 @@ class AnadirProfesion : AppCompatActivity() {
             nombre,
             descripcion,
             activa,
-            salario
+            salario.toDouble()
         )
         BaseDeDatosMemoria.arregloProfesion.add(profesion!!)
         mensaje.mostrarMensaje("Profesión guardada")
-        actividad.cambiarActivity(MainActivity::class.java)
+        finish()
     }
 }

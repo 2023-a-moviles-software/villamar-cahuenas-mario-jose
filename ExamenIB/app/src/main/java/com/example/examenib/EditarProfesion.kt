@@ -19,12 +19,13 @@ class EditarProfesion : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editar_profesion)
-        mensaje = Toaster(findViewById(R.id.txt_edicion_profesion))
+        mensaje = Toaster(findViewById(R.id.txt_anadir_profesion))
         val botonActualizar = findViewById<Button>(R.id.btn_actualizar_profesion)
 
 
         val id = intent.getIntExtra("profesion", -1)
         Log.i("Profesion","$id")
+
         profesion = BaseDeDatosMemoria.obtenerProfesionPorId(id)
         profesion?.let {
             cargarDatos(profesion!!)

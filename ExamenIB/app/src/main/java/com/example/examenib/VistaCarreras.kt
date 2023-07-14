@@ -2,6 +2,7 @@ package com.example.examenib
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
@@ -20,25 +21,25 @@ import java.util.ArrayList
 
 class VistaCarreras : AppCompatActivity() {
     val actividad = GestionardorIntent(this)
-    private var idCarrera = -1
+    private var seleccion = 0
     private var idProfesion = -1
     lateinit var adaptador: ArrayAdapter<Carrera>
     lateinit var profesion:Profesion
     lateinit var mensaje: Toaster
-
+    var idC = -1
+    var idP = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vista_carreras)
         val profesionTv = findViewById<TextView>(R.id.tv_profesion)
+        mensaje = Toaster(findViewById(R.id.tv_profesion))
 
         idProfesion = intent.getIntExtra("profesion", -1)
+        Log.i("Profesion", "ID: ${idProfesion}")
+        idP = idProfesion
 
-        actividad.callbacks = {
-            intet ->
-            intent.putExtra("carrera", idCarrera)
-            intent.putExtra("profesion", idProfesion)
-        }
+
         var carreras = ArrayList<Carrera>()
         carreras = BaseDeDatosMemoria.obtenerCarrerasPorProfesionId(idProfesion) as ArrayList<Carrera>
 
@@ -49,19 +50,39 @@ class VistaCarreras : AppCompatActivity() {
                 profesionTv.text = profesion.nombre
             }
         }
+
         val listView = findViewById<ListView>(R.id.lv_carreras)
         adaptador = ArrayAdapter(
             this,
             android.R.layout.simple_list_item_1,
             carreras
         )
+
+
+        actividad.callbacks = { intent ->
+            intent.putExtra("c", idC)
+            intent.putExtra("p", idP)
+            intent.putExtra("profesion", idProfesion)
+            intent.putExtra("carrera", seleccion)
+        }
+
+
         listView.adapter = adaptador
         adaptador.notifyDataSetChanged()
-        registerForContextMenu(listView)
+
 
         val botonCrear = findViewById<Button>(R.id.btn_add_carrera)
         botonCrear.setOnClickListener {
             actividad.cambiarActivity(AnadirCarrera::class.java)
+        }
+        registerForContextMenu(listView)
+        listView.setOnItemClickListener { parent, view, position, id ->
+            seleccion = position
+            mensaje.mostrarMensaje(
+                "Carrera seleccionada: ${
+                    carreras[position].nombre
+                }"
+            )
         }
     }
 
@@ -73,9 +94,11 @@ class VistaCarreras : AppCompatActivity() {
         super.onCreateContextMenu(menu, v, menuInfo)
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_carrera, menu)
-        val info = menuInfo as AdapterView.AdapterContextMenuInfo
+        val info  = menuInfo as AdapterView.AdapterContextMenuInfo
         val id = info.position
-        idCarrera = adaptador.getItem(id)?.id!!
+        seleccion = adaptador.getItem(id)?.id!!
+        idC = seleccion
+        Log.i("Carrera", "ID: ${seleccion}")
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
@@ -89,7 +112,7 @@ class VistaCarreras : AppCompatActivity() {
                 builder.setMessage("¿Está seguro que desea eliminar la carrera?")
                     .setCancelable(false)
                     .setPositiveButton("Si") { dialog, id ->
-                        BaseDeDatosMemoria.eliminarCarreraPorId(idCarrera)
+                        BaseDeDatosMemoria.obtenerProfesionPorId(idProfesion)?.carreras?.removeAt(seleccion-1)
                         adaptador.notifyDataSetChanged()
                         mensaje.mostrarMensaje("Carrera eliminada")
                     }

@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             val info  = menuInfo as AdapterView.AdapterContextMenuInfo
             val id = info.position
             seleccion = adaptador.getItem(id)?.id!!
-            Log.i("Item", "ID: ${seleccion}")
+            Log.i("Profesion", "ID: ${seleccion}")
         }
 
         fun mostrarDialooEliminar() {
