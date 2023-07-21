@@ -40,8 +40,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textColor="#FFFFFF"
-            android:textSize="12sp"
-
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
 
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
