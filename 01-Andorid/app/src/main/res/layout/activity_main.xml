@@ -107,4 +107,15 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/btn_ir_intent_implicito" />
 
+    <Button
+        android:id="@+id/btn_intent_firebase_ui"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#673AB7"
+        android:text="UI.Auth"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/btn_sqlite"
+        app:layout_constraintEnd_toEndOf="@+id/btn_google_maps"
+        app:layout_constraintStart_toStartOf="@+id/btn_revcycler_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
