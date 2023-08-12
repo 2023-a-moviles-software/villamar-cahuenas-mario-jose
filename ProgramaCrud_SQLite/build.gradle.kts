@@ -15,6 +15,12 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
     implementation(kotlin("stdlib-jdk8"))
+    //SQLite
+    implementation("org.jetbrains.exposed:exposed-core:0.35.1")
+    implementation ("org.jetbrains.exposed:exposed-jdbc:0.35.1")
+    implementation("org.xerial:sqlite-jdbc:3.34.0")
+
+
 }
 
 tasks.test {

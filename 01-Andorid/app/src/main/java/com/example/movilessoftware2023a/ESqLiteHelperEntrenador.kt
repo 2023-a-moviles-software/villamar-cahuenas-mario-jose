@@ -10,7 +10,7 @@ class ESqLiteHelperEntrenador(
     contexto,
     "moviles",
     null,
-    1
+    1   
 ){
     override fun onCreate(db: SQLiteDatabase?) {
         val scriptSQLCrearTablaEntrenador =
