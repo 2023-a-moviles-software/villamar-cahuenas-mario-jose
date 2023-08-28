@@ -102,7 +102,6 @@ class Ifirestore : AppCompatActivity() {
         }
     }
 
-
     fun eliminar(){
         val db = Firebase.firestore
         val referenciaEjemploEstudiante = db.collection("ejemplo")
@@ -113,7 +112,6 @@ class Ifirestore : AppCompatActivity() {
             .addOnSuccessListener {  }
 
     }
-
 
     fun crearEjemplo(){
         val db = Firebase.firestore
@@ -151,7 +149,7 @@ class Ifirestore : AppCompatActivity() {
             .add(datosEstudiante)
             .addOnCompleteListener {  }
             .addOnFailureListener {  }
-        
+
     }
 
     fun consultarIndiceCompuesto( adaptador: ArrayAdapter<ICities> ){

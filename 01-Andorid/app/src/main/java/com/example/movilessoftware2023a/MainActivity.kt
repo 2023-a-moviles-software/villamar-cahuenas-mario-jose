@@ -9,6 +9,7 @@ import android.provider.ContactsContract
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 
+
 class MainActivity : AppCompatActivity() {
 
     val callbackContenidoIntentExplicito =
@@ -129,6 +130,9 @@ class MainActivity : AppCompatActivity() {
         intentoExplicito.putExtra("nombre", "Mario")
         intentoExplicito.putExtra("apellido","Villamar")
         intentoExplicito.putExtra("edad",25)
+        intentoExplicito.putExtra("entrenador",BEntrenador(
+            1, "Mario","Entrenador"
+        ))
         //enviamos intent con Respeusta
         // recibimos respuesta
         callbackContenidoIntentExplicito.launch(intentoExplicito)
