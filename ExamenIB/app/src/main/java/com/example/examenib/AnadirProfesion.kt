@@ -7,12 +7,13 @@ import android.widget.CheckBox
 import android.widget.EditText
 import com.example.examenib.negocio.BaseDeDatosMemoria
 import com.example.examenib.negocio.Profesion
+import com.example.examenib.negocio.ProfesionDto
 import com.example.examenib.util.GestionardorIntent
 import com.example.examenib.util.Toaster
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class AnadirProfesion : AppCompatActivity() {
-    var profesion: Profesion? = null
-    val actividad = GestionardorIntent(this)
     lateinit var mensaje: Toaster
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +25,7 @@ class AnadirProfesion : AppCompatActivity() {
             guardarProfesion()
         }
     }
+
     fun guardarProfesion(){
         val nombre = findViewById<EditText>(R.id.et_nombre_profesion).text.toString()
         val descripcion = findViewById<EditText>(R.id.et_descripcion_profesion).text.toString()
@@ -39,15 +41,23 @@ class AnadirProfesion : AppCompatActivity() {
             return
         }
 
-        profesion = Profesion(
-            BaseDeDatosMemoria.arregloProfesion.size + 1,
-            nombre,
-            descripcion,
-            activa,
-            salario.toDouble()
+        val profesion = hashMapOf(
+            "nombre" to nombre,
+            "descripcion" to descripcion,
+            "salarioPromedio" to salario.toDouble(),
+            "activa" to activa
         )
-        BaseDeDatosMemoria.arregloProfesion.add(profesion!!)
-        mensaje.mostrarMensaje("Profesión guardada")
-        finish()
+
+        val db = Firebase.firestore
+
+        db.collection("profesiones")
+            .add(profesion)
+            .addOnSuccessListener {
+                mensaje.mostrarMensaje("Profesión guardada")
+                finish()
+            }
+            .addOnFailureListener {
+                mensaje.mostrarMensaje("Error al guardar la profesión")
+            }
     }
 }

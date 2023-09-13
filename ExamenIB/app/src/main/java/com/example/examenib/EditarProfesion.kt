@@ -10,6 +10,8 @@ import com.example.examenib.negocio.BaseDeDatosMemoria
 import com.example.examenib.negocio.Profesion
 import com.example.examenib.util.GestionardorIntent
 import com.example.examenib.util.Toaster
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class EditarProfesion : AppCompatActivity() {
     var profesion: Profesion? = null
@@ -23,13 +25,25 @@ class EditarProfesion : AppCompatActivity() {
         val botonActualizar = findViewById<Button>(R.id.btn_actualizar_profesion)
 
 
-        val id = intent.getIntExtra("profesion", -1)
+        val id = intent.getStringExtra("id")?: ""
         Log.i("Profesion","$id")
 
-        profesion = BaseDeDatosMemoria.obtenerProfesionPorId(id)
-        profesion?.let {
-            cargarDatos(profesion!!)
-        }
+        //profesion = BaseDeDatosMemoria.obtenerProfesionPorId(id)
+
+        val name = intent.getStringExtra("nombre")?: ""
+        val description = intent.getStringExtra("descripcion")?: ""
+        val salary = intent.getDoubleExtra("salarioPromedio", 0.0)
+        val active = intent.getBooleanExtra("activa", false)
+
+        val profesion = Profesion(
+            id,
+            name,
+            description,
+            active,
+            salary
+        )
+
+        cargarDatos(profesion)
 
         botonActualizar.setOnClickListener{
             actualizarProfesion(profesion!!)
@@ -67,8 +81,25 @@ class EditarProfesion : AppCompatActivity() {
         profesion.salarioPromedio = salario
         profesion.activa = activa
 
-        mensaje.mostrarMensaje("Profesión actualizada")
-//        actividad.cambiarActivity(MainActivity::class.java)
-        finish()
+        val updatedProfession = hashMapOf(
+            "nombre" to profesion.nombre,
+            "descripcion" to profesion.descripcion,
+            "salarioPromedio" to profesion.salarioPromedio,
+            "activa" to profesion.activa
+        )
+
+        val db = Firebase.firestore
+        db.collection("profesiones")
+            .document(profesion.id)
+            .set(updatedProfession)
+            .addOnSuccessListener {
+                mensaje.mostrarMensaje("Profesión actualizada")
+                finish()
+            }
+            .addOnFailureListener{
+                mensaje.mostrarMensaje("Error al actualizar profesión")
+            }
+
+
     }
 }

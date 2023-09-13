@@ -10,6 +10,8 @@ import com.example.examenib.negocio.BaseDeDatosMemoria
 import com.example.examenib.negocio.Carrera
 import com.example.examenib.util.GestionardorIntent
 import com.example.examenib.util.Toaster
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class EditarCarrera : AppCompatActivity() {
     var carrera: Carrera? = null
@@ -22,13 +24,23 @@ class EditarCarrera : AppCompatActivity() {
         mensaje = Toaster(findViewById(R.id.tv_edicion_carrera))
         var botonActualizar = findViewById<Button>(R.id.btn_actualizar_carrera)
 
-        val idC = intent.getIntExtra("c", -1)
-        Log.i("carrera", "ID: ${idC}")
+        val professionId = intent.getStringExtra("profesionId")?: ""
+        val carreraId = intent.getStringExtra("carreraId")?: ""
+        val nombreCarrera = intent.getStringExtra("nombreCarrera")?: ""
+        val descripcionCarrera = intent.getStringExtra("descripcionCarrera")?: ""
+        val duracionCarrera = intent.getStringExtra("duracionCarrera")?: ""
+        val activa = intent.getStringExtra("activa")?: ""
 
-        val idP = intent.getIntExtra("p", -1)
-        Log.i("Profesion", "ID: ${idP}")
+        val carrera = Carrera(
+            carreraId,
+            nombreCarrera,
+            descripcionCarrera,
+            activa.toBoolean(),
+            duracionCarrera.toInt(),
+            professionId
+        )
 
-        carrera = BaseDeDatosMemoria.obtenerProfesionPorId(idP)?.carreras?.find { it.id == idC }
+        cargarDatos(carrera)
 
         Log.i("carrera", "Carrera: ${carrera}")
         carrera?.let {
@@ -67,8 +79,25 @@ class EditarCarrera : AppCompatActivity() {
         carrera.descripcion = descripcion
         carrera.duracion = duracion.toInt()
         carrera.activa = activa
-        mensaje.mostrarMensaje("Carrera actualizada")
-//        actividad.cambiarActivity(VistaCarreras::class.java)
-        finish()
+
+        val carreraActualizada = hashMapOf(
+            "nombre" to carrera.nombre,
+            "descripcion" to carrera.descripcion,
+            "duracion" to carrera.duracion,
+            "activa" to carrera.activa,
+            "idProfesion" to carrera.profesionId
+        )
+
+        val db = Firebase.firestore
+        db.collection("carreras")
+            .document(carrera.id)
+            .set(carreraActualizada)
+            .addOnSuccessListener {
+                mensaje.mostrarMensaje("Carrera actualizada")
+                finish()
+            }
+            .addOnFailureListener {
+                mensaje.mostrarMensaje("Error al actualizar carrera")
+            }
     }
 }
